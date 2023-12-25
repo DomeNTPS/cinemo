@@ -13,5 +13,5 @@ export interface IFavorite {
 
 export interface IPage {
   data?: MovieDetail[];
-  onFavorite: any;
+  onFavorite?: any;
 }

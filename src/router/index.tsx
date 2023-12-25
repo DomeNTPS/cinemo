@@ -3,6 +3,7 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import Login from "../pages/Login";
 import Finder from "../pages/Finder";
 import MyFavorite from "../pages/MyFavorite";
+import Information from "../pages/Information";
 import { MovieDetail } from "../interface";
 import axios from "axios";
 
@@ -12,7 +13,7 @@ const Router = () => {
     const userAuth = localStorage.getItem("user");
     console.log(userAuth);
     if (userAuth) {
-      // navigate("/Finder");
+      navigate("/Finder");
     }
   }, []);
   const [movie, setMovie] = useState<MovieDetail[]>([]);
@@ -42,6 +43,10 @@ const Router = () => {
       <Route
         path="/MyFavorite"
         element={<MyFavorite data={movie} onFavorite={setMovie} />}
+      />
+      <Route
+        path="/Information"
+        element={<Information />}
       />
     </Routes>
   );

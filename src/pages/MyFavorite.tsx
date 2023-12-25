@@ -2,8 +2,12 @@ import React, { useEffect, useState } from "react";
 import { IFavorite, IPage, MovieDetail } from "../interface";
 import PageContainer from "./PageContainer";
 import Card from "../components/Card";
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const MyFavorite: React.FC<IPage> = ({ data, onFavorite }) => {
+
+  const navigate = useNavigate();
 
   const [favoriteMovie, setFavoriteMovie] = useState<MovieDetail[]>([]);
 
@@ -16,6 +20,11 @@ const MyFavorite: React.FC<IPage> = ({ data, onFavorite }) => {
       }
     }
   }, [data]);
+
+  const handleInformation = (movieDetail: MovieDetail) => {
+    console.log(movieDetail)
+    navigate("/Information", { state: {data : movieDetail}});
+  }
 
   const handleChange = (id: number) => {
     if (data) {
@@ -45,22 +54,32 @@ const MyFavorite: React.FC<IPage> = ({ data, onFavorite }) => {
   return (
     <div>
       <PageContainer>
-        {favoriteMovie?.map((i) => (
-          <div key={i.id} style={{ display: "flex" }}>
-            <Card
-              id={i.id}
-              poster_url={i.poster_url}
-              release_date={i.release_date}
-              title_en={i.title_en}
-              title_th={i.title_th}
-              onFav={handleFavorite}
-              fav={i.fav}
-            />
-          </div>
-        ))}
+      <Grid>
+          {favoriteMovie?.map((i) => (
+            <div key={i.id} style={{ display: "flex" }} >
+              <Card
+                id={i.id}
+                poster_url={i.poster_url}
+                release_date={i.release_date}
+                title_en={i.title_en}
+                title_th={i.title_th}
+                onFav={handleFavorite}
+                fav={i.fav}
+                seeDetail={() => handleInformation(i)}
+              />
+            </div>
+          ))}
+        </Grid>
       </PageContainer>
     </div>
   );
 };
 
 export default MyFavorite;
+
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+`;

@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import Card from "../components/Card";
 import { IPage } from "../interface";
 import PageContainer from "./PageContainer";
+import styled from "styled-components";
 
 const Finder: React.FC<IPage> = ({ data, onFavorite }) => {
-
   const handleChange = (id: number) => {
     if (data) {
       let items = [...data];
@@ -33,22 +33,31 @@ const Finder: React.FC<IPage> = ({ data, onFavorite }) => {
   return (
     <div>
       <PageContainer>
-        {data?.map((i) => (
-          <div key={i.id} style={{ display: "flex" }}>
-            <Card
-              id={i.id}
-              poster_url={i.poster_url}
-              release_date={i.release_date}
-              title_en={i.title_en}
-              title_th={i.title_th}
-              onFav={handleFavorite}
-              fav={i.fav}
-            />
-          </div>
-        ))}
+        <Grid>
+          {data?.map((i) => (
+            <div key={i.id} style={{ display: "flex" }}>
+              <Card
+                id={i.id}
+                poster_url={i.poster_url}
+                release_date={i.release_date}
+                title_en={i.title_en}
+                title_th={i.title_th}
+                onFav={handleFavorite}
+                fav={i.fav}
+              />
+            </div>
+          ))}
+        </Grid>
       </PageContainer>
     </div>
   );
 };
 
 export default Finder;
+
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+`;

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 interface ICard {
   id: number;
@@ -11,6 +11,7 @@ interface ICard {
   poster_url: string;
   onFav: any;
   fav: boolean;
+  seeDetail?: any
 }
 
 const Card: React.FC<ICard> = ({
@@ -21,6 +22,7 @@ const Card: React.FC<ICard> = ({
   title_th,
   onFav,
   fav,
+  seeDetail
 }) => {
   const onHandleFavorite = (id: number) => {
     onFav(id);
@@ -28,7 +30,7 @@ const Card: React.FC<ICard> = ({
 
   return (
     <Container key={id}>
-      <ImageContent src={poster_url} alt="Image" width={350} />
+      <ImageContent src={poster_url} alt="Image" width={250} onClick={seeDetail}/>
       <TitleEn>
         {title_en}
         {fav ? (
@@ -43,8 +45,8 @@ const Card: React.FC<ICard> = ({
           />
         )}
       </TitleEn>
-      <TitleTH>{title_th}</TitleTH>
-      <ReleaseDate>{release_date}</ReleaseDate>
+      <TitleTH onClick={seeDetail}>{title_th}</TitleTH>
+      <ReleaseDate onClick={seeDetail}>{release_date}</ReleaseDate>
     </Container>
   );
 };
@@ -52,8 +54,8 @@ const Card: React.FC<ICard> = ({
 export default Card;
 
 const Container = styled.div`
-  background-color: grey;
-  max-width: 350px;
+  /* background-color: grey; */
+  max-width: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -74,6 +76,7 @@ const TitleEn = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  max-width: 250px;
 `;
 
 const TitleTH = styled.div`
@@ -85,6 +88,9 @@ const TitleTH = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  max-width: 250px;
+  text-wrap: balance;
+  text-align: center;
 `;
 
 const ReleaseDate = styled.div`
@@ -97,4 +103,7 @@ const ReleaseDate = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 0px 0px 50px 50px;
+  max-width: 250px;
+  text-wrap: balance;
+  text-align: center;
 `;

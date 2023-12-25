@@ -8,14 +8,6 @@ import { MovieDetail } from "../interface";
 import axios from "axios";
 
 const Router = () => {
-  const navigate = useNavigate();
-  useEffect(() => {
-    const userAuth = localStorage.getItem("user");
-    console.log(userAuth);
-    if (userAuth) {
-      navigate("/Finder");
-    }
-  }, []);
   const [movie, setMovie] = useState<MovieDetail[]>([]);
   const getMovieList = async () => {
     await axios({
@@ -34,7 +26,6 @@ const Router = () => {
 
   return (
     <Routes>
-      {/* <Route path="/" element={<Login />} /> */}
       <Route path="/" element={<Login />} />
       <Route
         path="/Finder"

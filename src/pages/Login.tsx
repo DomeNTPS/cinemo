@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
 const Login = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  useEffect(() => {
+    const userAuth = localStorage.getItem("user");
+    console.log(userAuth);
+    if (userAuth) {
+      navigate("/Finder");
+    }
+  }, []);
   const onLogin = () => {
     console.log("login");
     if (username === "") {
